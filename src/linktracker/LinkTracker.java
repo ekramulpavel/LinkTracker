@@ -1,21 +1,37 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package linktracker;
 
-/**
- *
- * @author Pavel
- */
-public class LinkTracker {
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+public class LinkTracker {
     
+    // Pull the HTML code from the Website
+    public static void readFromWeb(String webURL) throws IOException {
+        URL url = new URL(webURL);
+        InputStream is =  url.openStream();
+        try( BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+            }
+        }
+        catch (MalformedURLException e) {
+            e.printStackTrace();
+            throw new MalformedURLException("URL is malformed!!");
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            throw new IOException();
+        }
+
+    }
+    public static void main(String[] args) throws IOException {
+        String url = "https://www.augmedix.com/";
+        readFromWeb(url);
+    }
+
 }

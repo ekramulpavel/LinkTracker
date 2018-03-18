@@ -9,7 +9,7 @@ import java.net.URL;
 
 public class LinkTracker {
     
-    // Pull the HTML code from the Website
+    // Retrive the HTML code from the Website
     public static void readFromWeb(String webURL) throws IOException {
         URL url = new URL(webURL);
         InputStream is =  url.openStream();
